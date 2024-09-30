@@ -1,0 +1,99 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Practical 4
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Plotting a family of solutions of
+the given second order 
+differential equations:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+Using the pre-defined
+function: ode2
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+y'' + 3y' +2y =0 where
+ y'(0)=b, y(0)=1
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: 'diff(y,x,2) + 3* 'diff(y,x) + 2*y =0;
+sol: ode2(eqn,y,x); 
+sol1: ic2(sol,x=0,y=1,'diff(y,x)=b); 
+/*ic2 solves IVP for second order differential equations*/
+ p1: ev(sol1, b=-2);
+ p2: ev(sol1, b=-1);
+ p3: ev(sol1, b=0);
+ p4: ev(sol1, b=1);
+ p5: ev(sol1, b=2);
+ wxplot2d([rhs(p1),rhs(p2),rhs(p3),rhs(p4),rhs(p5)],
+ [x,-1,4],[style,[lines,0.5],[lines,1],[lines,1.5],
+ [lines,2],[lines,2.5]],
+ [legend,"p1","p2","p3","p4","p5"]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+y'' + y' -6y =0
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+eqn: 'diff(y,x,2) + 'diff(y,x) - 6*y =0;
+sol: ode2(eqn,y,x); 
+p1: ev(sol,%k1 =1, %k2=0);
+p2: ev(sol, %k1 =0, %k2=1);
+p3: ev(sol, %k1 =1, %k2=1);
+wxplot2d([rhs(p1),rhs(p2),rhs(p3)],
+ [x,-3,5],[y,-1,10],
+ [legend,"p1","p2","p3"])$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Using the pre-defined
+function: desolve
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+y'' + 3y' +2y =0 where
+ y'(0)=b, y(0)=b
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+ eqn: diff(y(x),x,2) + 3* diff(y(x),x) + 2*y(x) =0;
+ sol: desolve(eqn,y(x)); 
+sol1: ev(sol, y(0)=b, diff(y(x),x)=b);
+ p1: ev(sol1, b=-2);
+ p2: ev(sol1, b=0);
+ p3: ev(sol1, b=2);
+ wxplot2d([rhs(p1),rhs(p2),rhs(p3)],
+ [x,-1,4],
+ [legend,"p1","p2","p3"]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+Exercise:   y'' + 3y' +
+ 2y =0 where y(0)=a, 
+            y'(0)=1
+ (using both ode2 and
+ desolve)
+   [wxMaxima: subsect end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

@@ -1,0 +1,67 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Practical 1:
+ Solving and
+ plotting 
+first order
+ differential
+ equations
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+diff(sin(x),x);  /* it differentiates first argument w.r.t second variable */
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+'diff(y,x);  /* single quote will tell maxima that y is dependent on ... */
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: 'diff(y,x) = x^2; /*the differential equation has been given the ... */
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ sol: ode2(eqn,y,x); /* ode2 is a predefined function for solving ODE 
+of order upto 2, sol is the name given to the general solution*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+psol: ic1(sol,x=0,y=1); /*ic1 stands for initial condition 1, 
+psol is a particular solution*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+a: ic1(sol, x=0,y=k);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+psol1: ev(a,k=-2); /*it evaluates a by replacing k=-2*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+psol2: ev(a, k=1);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+psol3: ev(a, k=0);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+wxplot2d([rhs(psol1),rhs(psol2),rhs(psol3)],[x,-5,5]);
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

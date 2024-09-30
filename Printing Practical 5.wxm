@@ -1,0 +1,79 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Practical 5
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Plotting a family of solutions of
+the given third order 
+differential equations:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+y''' - 5y'' + 8y' -4y
+ =0
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: diff(y(x),x,3)- 5* diff(y(x),x,2) + 8* diff(y(x),x) - 4* y(x)=0;
+ sol: desolve(eqn,y(x));
+ sol1: ev(sol, y(0)=a, diff(y(x),x)=b, diff(y(x),x,2)=c);
+ p1: ev(sol1,a=1,b=2,c=3);
+ p2: ev(sol1,a=1,b=3,c=2);
+ p3: ev(sol1,a=2,b=1,c=3);
+ p4: ev(sol1,a=2,b=3,c=1);
+ p5: ev(sol1,a=3,b=2,c=1);
+ wxplot2d([rhs(p1),rhs(p2),rhs(p3),rhs(p4),rhs(p5)], [x,2,4],
+          [legend,"p1","p2","p3","p4","p5"]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+y''' - 5y'' -22 y'
+ +56y =0; y(0)=1,
+ y'(0)=-2, 
+y''(0)= -4
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: diff(y(x),x,3)- 5* diff(y(x),x,2) - 22* diff(y(x),x) + 56* y(x)=0
+sol: desolve(eqn,y(x));
+sol1: ev(sol, y(0)=1, diff(y(x),x)=-2, diff(y(x),x,2)=-4);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Another way of doing this:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: diff(y(x),x,3)- 5* diff(y(x),x,2) - 22* diff(y(x),x) + 56* y(x)=0
+atvalue(y(x),x=0,1) $
+atvalue(diff(y(x),x),x=0,-2)$
+atvalue(diff(y(x),x,2),x=0,-4)$
+sol: desolve(eqn,y(x));
+wxplot2d(rhs(sol), [x,1,2]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Exercise: y''' -12
+ y'' + 48 y' -64y = 12- 
+32 exp(-8x) + 2 exp(4x)
+   [wxMaxima: section end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

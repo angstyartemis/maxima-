@@ -1,0 +1,96 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Practical 7
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Solving a system of ordinary
+differential equations.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+x' = 2x + 3y
+y' = 4x + 3y
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn1: diff(x(t),t)= 2* x(t) + 3* y(t);
+ eqn2: diff(y(t),t)= 4* x(t) + 3* y(t);
+ desolve([eqn1,eqn2],[x(t),y(t)]);
+ A: matrix([2,3], [4,3]);
+ eigenvalues(A);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+x' = 4x + 8y + 2
+ cos(t)- 16 sin(t)
+  y' = 6x + 2y +
+ cos(t)- 14 sin(t)
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn1: diff(x(t),t)= 4* x(t) + 8* y(t)+ 2*cos(t) - 16* sin(t);
+eqn2: diff(y(t),t)= 6* x(t) + 2* y(t)+ cos(t) - 14* sin(t);
+atvalue(x(t),t=0,15)$
+atvalue(y(t),t=0,13)$
+desolve([eqn1,eqn2],[x(t),y(t)]);
+A: matrix([4,8], [6,2]);
+eigenvalues(A);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+y'''' - 5 y'' + 4y =0
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn1: diff(y1(t),t)= y2(t);
+ eqn2: diff(y2(t),t)= y3(t);
+ eqn3: diff(y3(t),t)= y4(t);
+ eqn4: diff(y4(t),t)= 5*y3(t)- 4* y1(t);
+ atvalue(y1(t),t=0,8)$
+ atvalue(y2(t),t=0,7)$
+ atvalue(y3(t),t=0,-8)$
+ atvalue(y4(t),t=0,-7)$
+ desolve([eqn1,eqn2,eqn3,eqn4],[y1(t),y2(t),y3(t),y4(t)]);
+ A: matrix([0,1,0,0], [0,0,1,0],[0,0,0,1],[-4,0,5,0]);
+ eigenvalues(A);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+x' = x-y+8z
+y' = 10y -2z
+z' = 9z
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: section start ]
+x' = 8x-y
+y' = x + 10y
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: section start ]
+x' = -x+y+0.4z
+y' = x-0.1y + 1.4z
+z' = 0.4x + 1.4y + 0.2z
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: section start ]
+x' = -x+y + exp(-2t)
+y' = -x -y - 324t
+   [wxMaxima: section end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$
