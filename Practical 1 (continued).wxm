@@ -1,0 +1,160 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Practical 1
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+ Plotting the family of solutions
+ of first order differential
+ equations:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+Using the pre-defined
+ function: ode2
+
+(solves an ODE of
+ order upto 2)
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+y'= sin(x)*y, y(Π)=k
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: 'diff(y,x)= sin(x)*y;
+ sol: ode2(eqn,y,x);
+ sol1: ic1(sol,x=%pi/2,y=k);
+ p1: ev(sol1,k=-1);
+ p2: ev(sol1,k=-2);
+ p3: ev(sol1,k=1);
+ p4: ev(sol1,k=2);
+ wxplot2d([rhs(p1),rhs(p2),rhs(p3),rhs(p4)],[x,-10,10],
+ [style,[lines,1],[lines,2],[lines,3],[lines,4]],
+ [legend,"p1","p2","p3","p4"]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+(2xy)y'= y² -x², y(1)=k
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: (2*x*y)* 'diff(y,x)= y^2 -x^2;
+ sol: ode2(eqn,y,x);
+ sol1: ic1(sol,x=1,y=k);
+ p1: ev(sol1,k=1);
+ p2: ev(sol1,k=2);
+ load(draw);
+ wxdraw2d(implicit(p1,x,-1,6,y,-5,5),
+ implicit(p2,x,-1,6,y,-5,5));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+y'= y+ e^(-x), y(2)= -0.1
+  (Exercise !)
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill (all);
+ eqn: 'diff(y,x)= y+ exp(-x);   /* or write as %e^(-x)*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+Using the pre-defined
+ function: desolve 
+           (solves a
+ system of linear ODEs
+ of any order)
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: subsect start ]
+y' =x^2, y(0)=k
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: diff(y(x),x)= x^2;
+ sol: desolve(eqn,y(x)); /*desolve doesn't give arbitrary constants 
+                          but their value(s) in terms of y */
+ p1: ev(sol,y(0)=-1);    /*can't use "ic1" because no constant 
+                         %c in the solution*/
+ p2: ev(sol,y(0)=1);
+ wxplot2d([rhs(p1),rhs(p2)],[x,-1,1],
+         [style,[lines,1],[lines,2]],
+         [legend,"p1","p2"]);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+y'= sin(x)*y, y(Π)=k
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: diff(y(x),x)= sin(x)*y(x);
+ sol: desolve(eqn,y(x));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*"ilt" means that Maxima has failed to determine the inverse 
+Laplace transform. So desolve can't be used to solve the ODE*/;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+(2xy)y'= y² -x², y(1)=k
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: (2*x*y(x))*diff(y(x),x)= (y(x))^2- x^2;
+ sol: desolve(eqn,y(x));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/* desolve works for linear ODE, but this is non-linear */;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: subsect start ]
+y'= 9.8- 0.196 y
+   [wxMaxima: subsect end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn: diff(y(x),x)= 9.8- 0.196*y(x);
+ ratprint: false $ /*When Maxima gets float input, the simplifier 
+                    tries to convert this to rational representation 
+                    and informs the user about this conversion which 
+                    is normally irrelevant.To suppress this, we use 
+                    this command */
+ sol: desolve(eqn,y(x));
+ p1: ev(sol,y(0)=1);
+ p2: ev(sol,y(0)=0);
+ wxplot2d([rhs(p1),rhs(p2)],[x,-1,1],
+ [style,[lines,1],[lines,2]],
+ [legend,"p1","p2"]);
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

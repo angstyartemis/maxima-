@@ -1,0 +1,137 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+ Practical 6
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Solving a differential equation by
+variation of parameter method
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+y'' + y = tan(x)
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: comment start ]
+The general solution is given by:
+y = yc +yp
+where yc is a complementary
+function and yp is a particular
+integral
+
+For yc: we solve the corresponding
+homogeneous equation using ode2
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ode2('diff(y,x,2) + y = 0, y, x);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+y1(x):= sin(x);
+y2(x):= cos(x);
+A: matrix ( [y1(x), y2(x)],
+             [diff(y1(x),x), diff(y2(x),x)]
+           );
+W: determinant(A);      /*Wronskian*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Let yp =  v1(x)y1(x) +  v2(x)y2(x)
+where v1 and v2 are given by
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+v1 : integrate(-tan(x)* y2(x)/ W , x);
+v2 :  integrate(tan(x)* y1(x)/ W , x);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+yp: v1* y1(x) + v2 * y2(x);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ratsimp(%);                   /* simplify previous expression*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Therefore, general solution is 
+y= %k1 sin(x) + %k2 cos(x) -
+(cos(x)log(sin(x)+1) -
+cos(x)log(sin(x)-1))/2
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+x^2 y'' + x y' -y =
+ x^2 exp(x)
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ode2(x^2 * 'diff(y,x,2) + x* 'diff(y,x) -y = 0, y, x);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+y1(x):= x;
+y2(x):= 1/x;
+A: matrix ( [y1(x), y2(x)],
+             [diff(y1(x),x), diff(y2(x),x)]
+           );
+W: determinant(A);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+v1 : integrate(-x^2 * exp(x)* y2(x)/ (x^2 * W) , x);
+v2 :  integrate(x^2 * exp(x)* y1(x)/ (x^2 * W) , x);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+yp: v1* y1(x) + v2 * y2(x);
+ratsimp(%);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+y''  + a^2 y =
+ sec(ax)    a is
+ non-zero
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: section start ]
+y'' - 2 y' + y = x
+ exp(x) log(x)  ; x >0
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: section start ]
+y'' - y = 2 exp(x)/
+ (1+ exp(x))
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: section start ]
+y'' -2 y' + y =
+ exp(x) arcsin(x) 
+(Hint: Use asin(x))
+   [wxMaxima: section end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

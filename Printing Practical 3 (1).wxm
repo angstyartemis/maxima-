@@ -1,0 +1,167 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Practical 3
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Solving Cauchy Problem for first
+order partial differential
+equation
+and hence plotting the integral
+surface with initial curve.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+u_x - u_y =1 ;
+u(x,0)=x^2
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ kill(all);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn1: 'diff(y,x)=-1;
+ sol1: ode2(eqn1,y,x);
+ sol1: subst([%c= c1],sol1);
+ solve(sol1,c1);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn2: 'diff(u,x)= 1;
+ sol2: ode2(eqn2,u,x);
+ sol2: subst([%c= c2],sol2);
+ solve(sol2,c2);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Therefore, the general solution of
+the PDE is given by:
+u-x = f(x+y)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+solve(u-x=f(x+y),u);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+u(x,y):= f(y+x) +x;
+u(x,0)=x^2;
+solve(%,f(x));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+f(x):= x^2 -x;
+ 'u(x,y)= u(x,y);
+ /*plotting integral surface*/
+ wxplot3d(u(x,y),[x,-1,1],[y,-1,1]);
+ /*plotting initial curve*/
+ wxdraw3d(xlabel="X", ylabel="Y", zlabel="U",
+       title= "Initial curve",
+       parametric(s,0,s^2,s, -2,2)
+        );
+ /*plotting integral surface with initial curve*/
+ wxdraw3d(xlabel="X", ylabel="Y", zlabel="U",
+       title= "Integral surface with initial curve",
+       color= green, explicit((y+x)^2 -y, x,-1,1,y,-1,1),
+       color= blue, parametric(s,0,s^2,s, -2,2)
+        );
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+x u_x +  u_t =t  ; 
+u(x,0)= x^2  (Exercise)
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: section start ]
+x u_x + y u_y = x
+ e^(-y); u=0 on y=x^2
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn1: 'diff(y,x)=y/x;
+ sol1: ode2(eqn1,y,x);
+ sol1: subst([%c =c1],sol1);
+ solve(sol1,c1);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+eqn2: 'diff(u,y)= c1 * %e^(-y);   
+sol2: ode2(eqn2,u,y);
+ sol2: subst([%c =c2],sol2);
+ solve(sol2,c2);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Therefore, the general solution of
+the PDE is given by:
+e^(-y)(u e^y + y/x) = f(y/x)
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+solve(%e^(-y)*(u * %e^y + y/x) = f(y/x),u);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+u(x,y):= (exp(-y)*(x* exp(y)*f(y/x)-y))/x;
+u(x,x^2)=0;
+solve(%,f(x));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+f(x):= x* exp(-(x^2));
+'u(x,y)=u(x,y);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+/*plotting integral surface*/
+ wxplot3d(u(x,y),[x,-1,1],[y,-1,1]);
+ /*plotting initial curve*/
+ wxdraw3d(xlabel="X", ylabel="Y", zlabel="U",
+       title= "Initial curve",
+       parametric(s,s^2,0,s, -2,2)
+        );
+ /*plotting integral surface with initial curve*/
+ wxdraw3d(xlabel="X", ylabel="Y", zlabel="U",
+       title= "Integral surface with initial curve",
+       color= green, explicit(exp(-y)*(y*exp(y- (y^2/x^2))-y)/x, 
+        x,-1,1,y,-1,1),
+       color= blue, parametric(s,s^2,0,s, -2,2)
+        );
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+u_x + x u_y =0;
+ u(0,y)= sin(y)   
+(Exercise)
+   [wxMaxima: section end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$

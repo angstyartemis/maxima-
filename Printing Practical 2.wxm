@@ -1,0 +1,54 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Practical 2
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Plotting a family of
+characteristic curves of first
+order PDE
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: section start ]
+(y+u) u_x + y u_y = x-y
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: input   start ] */
+ eqn1: diff(x(t),t)= y(t) + u(t);  /*Characteristic equations*/
+ eqn2: diff(y(t),t)= y(t);
+ eqn3: diff(u(t),t)= x(t)-y(t);
+ sol: desolve([eqn1,eqn2,eqn3],[x(t),y(t),u(t)]);
+ psol1: ev(sol, x(0)=1, y(0)=20, u(0)=30);
+ psol2: ev(sol, x(0)=5, y(0)=9, u(0)=8);
+ psol3: ev(sol, x(0)=0, y(0)=19, u(0)=80);
+ wxdraw3d(grid=true, nticks= 500, xlabel="X",ylabel="Y", zlabel="U", 
+         line_width=3,
+         color=blue, key="Curve 1", 
+         parametric(rhs(psol1[1]),rhs(psol1[2]),rhs(psol1[3]),t,-1,1),
+         color=red, key="Curve 2", 
+         parametric(rhs(psol2[1]),rhs(psol2[2]),rhs(psol2[3]),t,-1,1),
+         color=magenta, key="Curve 3", 
+         parametric(rhs(psol3[1]),rhs(psol3[2]),rhs(psol3[3]),t,-1,1)
+        );   
+/*nticks sets the number of points used in plotting, so it controls 
+the smmothness of the curve*/
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: section start ]
+3 u_x + 4 u_y = u
+   [wxMaxima: section end   ] */
+
+
+/* [wxMaxima: section start ]
+-x u_x + y u_y = 1
+   [wxMaxima: section end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$
